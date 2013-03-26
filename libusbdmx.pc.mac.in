@@ -1,0 +1,11 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libusbdmx
+Version: 0.1
+Description: Mac OS-Driver for usb-dmx-Interface from Digital Enlightment and FX5
+Requires:
+Libs: -L${libdir} -lusbdmx-static -lhidapi-static -lpthread -framework CoreFoundation -framework IOKit
+Cflags: -I${includedir}

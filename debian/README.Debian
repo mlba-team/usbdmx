@@ -1,0 +1,9 @@
+Notes for the Debian usbdmx packages:
+
+ To compile code against the shared usbdmx library, use:
+
+   gcc -c code.c -o code.o -lusbdmx
+
+ To compile code against the static usbdmx library, use:
+
+   gcc -c code.c -o code.o -lhidapi-usbdmx

@@ -1,0 +1,17 @@
+usbdmx (0.1~e4405ac337git-1ubuntu1) precise; urgency=low
+
+  * Fixed the library name within the pkgconfig.
+
+ -- Marius Zwicker <marius@mlba-team.de>  Tue, 22 Aug 2012 01:58:00 +0200
+
+usbdmx (0.1~e4405ac337git-0ubuntu1) precise; urgency=low
+
+  * Added pkg-config support.
+
+ -- Marius Zwicker <marius@mlba-team.de>  Tue, 21 Aug 2012 23:54:00 +0200
+
+usbdmx (0.0e4405ac337git-0ubuntu1) precise; urgency=low
+
+  * Initial release.
+
+ -- Marius Zwicker <marius@mlba-team.de>  Sun, 12 Aug 2012 21:51:00 +0200

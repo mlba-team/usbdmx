@@ -1,0 +1,36 @@
+Source: usbdmx
+Priority: optional
+Section: devel
+Maintainer: Marius Zwicker <marius@mlba-team.de>
+Build-Depends: debhelper (>= 7.0.50~), quilt (>= 0.46-7~), cmake,
+ libc6, libgcc1, libudev-dev, doxygen, libhidapi-dev
+Standards-Version: 3.9.1
+Vcs-Svn: https://github.com/fx5/usbdmx.git
+Vcs-Browser: https://github.com/fx5/usbdmx
+Homepage: https://github.com/fx5/usbdmx
+
+Package: libusbdmx
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Suggests: libhidapi-dev (= ${binary:Version})
+Description: Linux-Driver for usb-dmx-Interface from Digital Enlightment and FX5
+ Provides a simple C interface for communicating and configuring the self-made
+ dmx interface of digital enlightment. Should be more or less compatible with the
+ original Windows-Drivers usbdmx.dll and (!) usbdmxsi.dll
+
+Package: libusbdmx-dev
+Section: libdevel
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libusbdmx (= ${binary:Version})
+Description: Development Files - Linux-Driver for usb-dmx-Interface from Digital Enlightment and FX5
+ Provides a simple C interface for communicating and configuring the self-made
+ dmx interface of digital enlightment. Should be more or less compatible with the
+ original Windows-Drivers usbdmx.dll and (!) usbdmxsi.dll
+
+Package: usbdmx-doc
+Section: universe/doc
+Architecture: all
+Depends: libusbdmx-dev (= ${binary:Version})
+Description: Linux-Driver for usb-dmx-Interface from Digital Enlightment and FX5
+ Example files for using the api of usbdmx

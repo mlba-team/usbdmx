@@ -1,0 +1,4 @@
+usr/include/usbdmx.h
+usr/lib/libusbdmx-static.a
+usr/lib/libusbdmx.so
+usr/share/pkgconfig/libusbdmx.pc
