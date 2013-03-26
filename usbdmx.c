@@ -28,7 +28,7 @@ POSSIBILITY OF SUCH DAMAGE.
 */
 
 #include "usbdmx.h"
-#include "hidapi.h"
+#include <hidapi/hidapi.h>
 #include <stdio.h>
 #include <sys/types.h>
 #include <string.h>
@@ -214,6 +214,7 @@ void *read_write_thread(void *pointer)
                     buffer[0] = 0;
                     buffer[1] = i;
                     res = hid_write(device->handle, buffer, 34);
+                    (void)res;
                 }
             }
         }

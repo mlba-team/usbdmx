@@ -1,7 +1,3 @@
-#ifdef __cplusplus
-extern "C" { 
-#endif
-
 #include <stdint.h>
 
 // types for library functions
@@ -60,7 +56,4 @@ DWORD OpenInterface(TDMXArray * DMXOutArray, TDMXArray * DMXInArray, unsigned ch
 DWORD CloseInterface(void);
 
 
-#ifdef __cplusplus
-}
-#endif
 
