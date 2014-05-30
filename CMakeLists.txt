@@ -4,21 +4,38 @@ project(usbdmx)
 set(SRC usbdmx.c)
 set(HEADER usbdmx.h)
 
+if(WIN32)
+    file(GLOB ADD_SRC windows/*)
+elseif(APPLE)
+    file(GLOB ADD_SRC mac/*)
+    set(LIBS pthread)
+else()
+    file(GLOB ADD_SRC linux/*)
+    set(LIBS pthread)
+endif()
+set(SRC ${SRC} ${ADD_SRC})
+
 if(NOT HAS_MZ_GLOBAL)
     include(global.cmake)
 endif()
 
 # library
 add_library(usbdmx SHARED ${SRC} ${HEADER})
-set_property(TARGET usbdmx PROPERTY VERSION 0.1~e4405ac337git)
-set_property(TARGET usbdmx PROPERTY SOVERSION 0.1~e4405ac337git)
+set_property(TARGET usbdmx PROPERTY VERSION 0.9~10b1git)
+set_property(TARGET usbdmx PROPERTY SOVERSION 0.9~10b1git)
 add_library(usbdmx-static STATIC ${SRC} ${HEADER})
-set_property(TARGET usbdmx-static PROPERTY VERSION 0.1~e4405ac337git)
-set_property(TARGET usbdmx-static PROPERTY SOVERSION 0.1~e4405ac337git)
-target_link_libraries(usbdmx hidapi pthread)
-target_link_libraries(usbdmx-static hidapi pthread)
+set_property(TARGET usbdmx-static PROPERTY VERSION 0.9~10b1git)
+set_property(TARGET usbdmx-static PROPERTY SOVERSION 0.9~10b1git)
+target_link_libraries(usbdmx ${LIBS})
+target_link_libraries(usbdmx-static ${LIBS})
 mz_target_props(usbdmx)
+set_target_properties( usbdmx PROPERTIES
+    INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_LIST_DIR}
+)
 mz_target_props(usbdmx-static)
+set_target_properties( usbdmx-static PROPERTIES
+    INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_LIST_DIR}
+)
 
 # examples
 mz_use_default_compiler_settings()
