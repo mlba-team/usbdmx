@@ -1,26 +1,43 @@
+
+#ifndef USBDMX_H_
+#define USBDMX_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stdint.h>
+
+#define DWORD uint32_t
+#ifdef WIN32
+    #define USB_DMX_DLL __declspec(dllexport) __stdcall
+    #define USB_DMX_CALLBACK __stdcall
+#else
+    #define USB_DMX_DLL
+    #define USB_DMX_CALLBACK
+#endif
+
 
 // types for library functions
 typedef unsigned char TDMXArray[512];
 typedef char TSERIAL[16];
 typedef TSERIAL TSERIALLIST[32];
-typedef void (THOSTDEVICECHANGEPROC) (void);
-typedef void (THOSTINPUTCHANGEPROCBLOCK) (unsigned char blocknumber);
+typedef void USB_DMX_CALLBACK (THOSTDEVICECHANGEPROC) (void);
+typedef void USB_DMX_CALLBACK (THOSTINPUTCHANGEPROCBLOCK) (unsigned char blocknumber);
 
-#define DWORD uint32_t
 
 // define library functions
-void GetAllConnectedInterfaces(TSERIALLIST* SerialList);
-void GetAllOpenedInterfaces(TSERIALLIST* SerialList);
-DWORD OpenLink(TSERIAL Serial, TDMXArray *DMXOutArray, TDMXArray *DMXInArray);
-DWORD CloseLink (TSERIAL Serial);
-DWORD CloseAllLinks (void);
-DWORD RegisterInterfaceChangeNotification (THOSTDEVICECHANGEPROC Proc);
-DWORD UnregisterInterfaceChangeNotification (void);
-DWORD RegisterInputChangeNotification (THOSTDEVICECHANGEPROC Proc);
-DWORD UnregisterInputChangeNotification (void);
+USB_DMX_DLL void GetAllConnectedInterfaces(TSERIALLIST* SerialList);
+USB_DMX_DLL void GetAllOpenedInterfaces(TSERIALLIST* SerialList);
+USB_DMX_DLL DWORD OpenLink(TSERIAL Serial, TDMXArray *DMXOutArray, TDMXArray *DMXInArray);
+USB_DMX_DLL DWORD CloseLink (TSERIAL Serial);
+USB_DMX_DLL DWORD CloseAllLinks (void);
+USB_DMX_DLL DWORD RegisterInterfaceChangeNotification (THOSTDEVICECHANGEPROC Proc);
+USB_DMX_DLL DWORD UnregisterInterfaceChangeNotification (void);
+USB_DMX_DLL DWORD RegisterInputChangeNotification (THOSTDEVICECHANGEPROC Proc);
+USB_DMX_DLL DWORD UnregisterInputChangeNotification (void);
 
-DWORD SetInterfaceMode (TSERIAL Serial, unsigned char Mode);
+USB_DMX_DLL DWORD SetInterfaceMode (TSERIAL Serial, unsigned char Mode);
   // Modes:
   // 0: Do nothing - Standby
   // 1: DMX In -> DMX Out
@@ -31,18 +48,18 @@ DWORD SetInterfaceMode (TSERIAL Serial, unsigned char Mode);
   // 6: PC Out -> DMX Out & DMX In -> PC In
   // 7: DMX In + PC Out -> DMX Out & DMX In -> PC In
 
-DWORD GetDeviceVersion(TSERIAL Serial);
-DWORD SetInterfaceAdvTxConfig(
+USB_DMX_DLL DWORD GetDeviceVersion(TSERIAL Serial);
+USB_DMX_DLL DWORD SetInterfaceAdvTxConfig(
     TSERIAL Serial, unsigned char Control, uint16_t Breaktime, uint16_t Marktime,
     uint16_t Interbytetime, uint16_t Interframetime, uint16_t Channelcount, uint16_t Startbyte
 );
-DWORD StoreInterfaceAdvTxConfig(TSERIAL Serial);
-DWORD RegisterInputChangeBlockNotification(THOSTINPUTCHANGEPROCBLOCK Proc);
-DWORD UnregisterInputChangeBlockNotification(void);
+USB_DMX_DLL DWORD StoreInterfaceAdvTxConfig(TSERIAL Serial);
+USB_DMX_DLL DWORD RegisterInputChangeBlockNotification(THOSTINPUTCHANGEPROCBLOCK Proc);
+USB_DMX_DLL DWORD UnregisterInputChangeBlockNotification(void);
 
-/// And the Functions from usbdmxsi.dll also
+/// And the Functions from usbdmxsi.USB_DMX_DLL also
 
-DWORD OpenInterface(TDMXArray * DMXOutArray, TDMXArray * DMXInArray, unsigned char Mode);
+USB_DMX_DLL DWORD OpenInterface(TDMXArray * DMXOutArray, TDMXArray * DMXInArray, unsigned char Mode);
   // Modes:
   // 0: Do nothing - Standby
   // 1: DMX In -> DMX Out
@@ -53,7 +70,11 @@ DWORD OpenInterface(TDMXArray * DMXOutArray, TDMXArray * DMXInArray, unsigned ch
   // 6: PC Out -> DMX Out & DMX In -> PC In
   // 7: DMX In + PC Out -> DMX Out & DMX In -> PC In
 
-DWORD CloseInterface(void);
+USB_DMX_DLL DWORD CloseInterface(void);
 
+#ifdef __cplusplus
+}
+#endif
 
+#endif // defined USBDMX_H_
 

@@ -6,15 +6,15 @@ extern "C" {
 #include <string.h>
 #include <stdlib.h>
 
-void InterfaceChange(void) {
+void USB_DMX_CALLBACK InterfaceChange(void) {
     printf("Interface cnonfiguration has changed\n");
 }
 
-void InputChange(void) {
+void USB_DMX_CALLBACK InputChange(void) {
     printf("Input has changed\n");
 }
 
-void InputChangeBlock(unsigned char block_number) {
+void USB_DMX_CALLBACK InputChangeBlock(unsigned char block_number) {
     // printf("Block %d changed\n", block_number);
 }
 
